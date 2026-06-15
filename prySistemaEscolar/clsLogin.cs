@@ -58,11 +58,17 @@ namespace prySistemaEscolar
                         {
                             if (resultado.Read())
                             {
-                                perfil = resultado.GetString("perfil");
-                                MessageBox.Show("Tu perfil es: " + perfil, "Sistema");
-                                return true;
-                            }
-                            else
+								perfil = resultado.GetString("perfil");
+								AsignarPermisos();
+								if (!esAdministrador && !esdocenete)
+								{
+									throw new Exception($"El perfil {perfil} no tiene permisos para accder");
+								}
+								MessageBox.Show("Tu perfil es: " + perfil, "Sistema");
+								return true;
+
+							}
+							else
                             {
                                 throw new Exception("Usuario o contraseña incorrectos.");
                             }
