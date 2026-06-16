@@ -36,6 +36,12 @@ namespace prySistemaEscolar
             pcbCarreras.BackColor = Color.Transparent;
             pcbDocentes.BackColor = Color.Transparent;
             pcbUsuarios.BackColor = Color.Transparent;
+
+            pcbCarreras.Enabled = clsLogin.EsAdminitrador;
+            pcbDocentes.Enabled = clsLogin.EsAdminitrador;
+            pcbUsuarios.Enabled = clsLogin.EsAdminitrador;
+
+            pcbAlumnos.Enabled = clsLogin.EsAdminitrador || clsLogin.EsDocente;
         }
         //private void pcbAlumnos_MouseDown(object sender, MouseEventArgs e)
         //{
