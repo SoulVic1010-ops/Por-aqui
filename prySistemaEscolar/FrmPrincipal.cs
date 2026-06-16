@@ -25,7 +25,18 @@ namespace prySistemaEscolar
             PictureBox pcb = (PictureBox)mipictureSeleccionado;
             pcb.Location = new Point(pcb.Location.X - 3, pcb.Location.Y - 3);
         }
-
+        //Cambiando el parent de los picture
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+            pcbAlumnos.Parent = pcbMenu;
+            pcbCarreras.Parent = pcbMenu;
+            pcbDocentes.Parent = pcbMenu;
+            pcbUsuarios.Parent = pcbMenu;
+            pcbAlumnos.BackColor = Color.Transparent;
+            pcbCarreras.BackColor = Color.Transparent;
+            pcbDocentes.BackColor = Color.Transparent;
+            pcbUsuarios.BackColor = Color.Transparent;
+        }
         //private void pcbAlumnos_MouseDown(object sender, MouseEventArgs e)
         //{
           //  pcbAlumnos.Location = new Point(pcbAlumnos.Location.X + 3, pcbAlumnos.Location.Y + 3);
