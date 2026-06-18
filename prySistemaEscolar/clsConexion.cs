@@ -8,10 +8,10 @@ namespace prySistemaEscolar
 {
     internal class clsConexion
     {
-        private string host = "sql5.freesqldatabase.com";
-        private string bd = "sql5829931";
-        private string usuario = "sql5829931";
-        private string password = "QgEpgQPGh4";
+        private string host = "189.240.192.140";
+        private string bd = "bdescuelagbequipo2";
+        private string usuario = "gbEquipo2";
+        private string password = "grupo2";
         private string puerto = "3306";
 
         private string cadenaConexion => $"server = {host}; database = {bd}; user = {usuario}; password = {password}; port = {puerto}";

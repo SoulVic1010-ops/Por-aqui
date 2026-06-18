@@ -19,7 +19,7 @@ namespace prySistemaEscolar
         private static bool esdocenete;
 
         //Propiedad Estatica
-        public static bool EsAdminitrador { get => esAdministrador; }
+        public static bool EsAdministrador { get => esAdministrador; }
         public static bool EsDocente { get => esdocenete; }
 
         public void AsignarPermisos()
@@ -47,8 +47,8 @@ namespace prySistemaEscolar
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT perfil FROM tblUsuarios " +
-                                 "WHERE nombreUsuario = @usuario AND password = @password;";
+                    string sql = "SELECT vchperfil FROM tblUsuarios " +
+                                 "WHERE vchnombreUsuario = @usuario AND vchpassword = MD5(@password)";
                     using (var consulta = new MySqlCommand(sql, conexion))
                     {
                         consulta.Parameters.AddWithValue("@usuario", usuario);
@@ -58,7 +58,7 @@ namespace prySistemaEscolar
                         {
                             if (resultado.Read())
                             {
-								perfil = resultado.GetString("perfil");
+								perfil = resultado.GetString("vchperfil");
 								AsignarPermisos();
 								if (!esAdministrador && !esdocenete)
 								{
