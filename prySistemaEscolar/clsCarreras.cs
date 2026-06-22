@@ -7,6 +7,8 @@ namespace prySistemaEscolar
 {
 	internal class clsCarreras
 	{
+		private string descripcion;
+		private int idcarrera;//este atributo es para referencia en update y delete
 		//usamos un adaptador
 		private MySqlDataAdapter consulta;
 		//usamos una tabla temporal
@@ -24,6 +26,33 @@ namespace prySistemaEscolar
 			consulta.Fill(tabla);
 			return (tabla);
 		}
+
+
+
+		//Metodo para actualizar 
+		public string GuardarActualizar(int tipoOperacion)
+		{
+			string msg = "";
+
+			clsConexion conexionBD=new clsConexion();
+			using (var conexion = conexionBD.AbrirConexion())
+			{
+
+
+				switch (tipoOperacion)
+				{
+					case 0://insertar 
+						string sql = "INSERT INTO tblcarreras(nombreCarrera,descrpcion) VALUES(@nombreCarrera,'@descripcion');";
+						break;
+					case 1://actualizar
+
+						break;
+
+				}
+			}//libera la cnexion
+		}
+
+		
 
 		
 	}
