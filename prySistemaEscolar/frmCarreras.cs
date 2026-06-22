@@ -11,7 +11,7 @@ namespace prySistemaEscolar
 	public partial class frmCarreras : Form
 	{
 		clsCarreras carreras;
-
+		int idCarrera;
 		public frmCarreras()
 		{
 			InitializeComponent();
