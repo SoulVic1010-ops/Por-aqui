@@ -11,7 +11,7 @@ namespace prySistemaEscolar
 	public partial class frmCarreras : Form
 	{
 		clsCarreras carreras;
-
+		int idCarrera;
 		public frmCarreras()
 		{
 			InitializeComponent();
@@ -104,6 +104,7 @@ namespace prySistemaEscolar
 			btnGuardar.Size = new Size(105, 46);
 			btnGuardar.TabIndex = 3;
 			btnGuardar.UseVisualStyleBackColor = true;
+			btnGuardar.Click += btnGuardar_Click;
 			// 
 			// btnNuevo
 			// 
@@ -114,6 +115,7 @@ namespace prySistemaEscolar
 			btnNuevo.Size = new Size(105, 46);
 			btnNuevo.TabIndex = 2;
 			btnNuevo.UseVisualStyleBackColor = true;
+			btnNuevo.Click += btnNuevo_Click;
 			// 
 			// txtDescripcion
 			// 
@@ -156,8 +158,10 @@ namespace prySistemaEscolar
 			dgvCarreras.EnableHeadersVisualStyles = false;
 			dgvCarreras.Location = new Point(314, 342);
 			dgvCarreras.Name = "dgvCarreras";
+			dgvCarreras.RowHeadersWidth = 51;
 			dgvCarreras.Size = new Size(624, 133);
 			dgvCarreras.TabIndex = 3;
+			dgvCarreras.SelectionChanged += dgvCarreras_SelectionChanged;
 			// 
 			// txtNombreCarrera
 			// 
@@ -202,21 +206,24 @@ namespace prySistemaEscolar
 		private TextBox txtNombreCarrera;
 		private Panel pnlAgrupaControles;
 
-		private void txtNombreCarrera_TextChanged(object sender, EventArgs e)
+		private void dgvCarreras_SelectionChanged(object sender, EventArgs e)
 		{
-			carreras = new clsCarreras();
-			dgvCarreras.DataSource = null;
-			dgvCarreras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-			try
-			{
-				carreras.NombreCarrera= txtNombreCarrera.Text;
-				dgvCarreras.DataSource = carreras.Consultar();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
+			//Este es el campo oculto que me servirá de referencia para actualizar y eliminar
+			idCarrera = int.Parse(dgvCarreras.CurrentRow.Cells[0].Value.ToString());
+			//estos son visuales
+			txtNombre.Text = dgvCarreras.CurrentRow.Cells[1].Value.ToString();
+			txtDescripcion.Text = dgvCarreras.CurrentRow.Cells[2].Value.ToString();
+		}
 
-			}
+		private void btnGuardar_Click(object sender, EventArgs e)
+		{
+			int tipoOperacion = idCarrera==0 ? 0 : 1;
+			carreras.GuardarActualizar(tipoOperacion);
+		}
+
+		private void btnNuevo_Click(object sender, EventArgs e)
+		{
+			idCarrera = 0;
 
 		}
 	}

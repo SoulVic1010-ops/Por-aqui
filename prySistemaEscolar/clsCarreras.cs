@@ -7,7 +7,8 @@ namespace prySistemaEscolar
 {
 	internal class clsCarreras
 	{
-		private string nombreCarrera;
+		private string descripcion;
+		private int idcarrera;//este atributo es para referencia en update y delete
 		//usamos un adaptador
 		private MySqlDataAdapter consulta;
 		//usamos una tabla temporal
@@ -40,31 +41,34 @@ namespace prySistemaEscolar
 			return (tabla);
 		}
 
-		//metodo para consultar por coincidencias
-		public DataTable Consultar()
+
+
+		//Metodo para actualizar 
+		public string GuardarActualizar(int tipoOperacion)
 		{
-			tabla = new DataTable();
-			try 
+			string msg = "";
+
+			clsConexion conexionBD=new clsConexion();
+			using (var conexion = conexionBD.AbrirConexion())
 			{
-				clsConexion conexionBD = new clsConexion();
-				using (var conexion = conexionBD.AbrirConexion())
+
+
+				switch (tipoOperacion)
 				{
-					string sql = "SELECT idCarrera AS Clave,nombreCarrera AS Carrera,descripcion AS Descipción FROM tblcarreras WHERE nombreCarrera LIKE @carrera;";
-					using (var consultar = new MySqlCommand(sql, conexion))
-					{
-						consultar.Parameters.AddWithValue("@carrera", "%"+nombreCarrera+"%");
-						using (consulta  = new MySqlDataAdapter(consultar))
-						{
-							consulta.Fill(tabla);
-						}//libera el adaptador 
-					}//liberar la consulta
-				}//Libera la conexion
-			}catch(Exception ex)
-			{
-				throw new Exception("Error en la conexion de la base de datos" + ex.Message);
-			}
-			return tabla;
+					case 0://insertar 
+						string sql = "INSERT INTO tblcarreras(nombreCarrera,descrpcion) VALUES(@nombreCarrera,'@descripcion');";
+						break;
+					case 1://actualizar
+
+						break;
+
+				}
+			}//libera la cnexion
 		}
+
+		
+
+		
 	}
 
 		
