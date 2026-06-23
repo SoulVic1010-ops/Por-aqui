@@ -20,9 +20,9 @@ namespace prySistemaEscolar
                     Application.Run(new FrmPrincipal());
                 }
             }
-            */
             
             
+            //Application.Run(new frmCarreras());
             Application.Run(new frmCarreras());
 		
 	    }

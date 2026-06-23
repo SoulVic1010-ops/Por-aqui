@@ -18,14 +18,23 @@ namespace prySistemaEscolar
 			carreras = new clsCarreras();
 			dgvCarreras.DataSource = null;
 			dgvCarreras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-			dgvCarreras.DataSource = carreras.CargarDataGrid();
+			try
+			{
+				dgvCarreras.DataSource = carreras.CargarDataGrid();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+
+			}
 
 		}
 
+
 		private void InitializeComponent()
 		{
-			DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-			DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
 			pcbLogo = new PictureBox();
 			lblTitulo = new Label();
 			pnlAgrupaControles = new Panel();
@@ -35,7 +44,7 @@ namespace prySistemaEscolar
 			txtDescripcion = new TextBox();
 			txtNombre = new TextBox();
 			dgvCarreras = new DataGridView();
-			textBox1 = new TextBox();
+			txtNombreCarrera = new TextBox();
 			((ISupportInitialize)pcbLogo).BeginInit();
 			pnlAgrupaControles.SuspendLayout();
 			((ISupportInitialize)dgvCarreras).BeginInit();
@@ -129,23 +138,23 @@ namespace prySistemaEscolar
 			// dgvCarreras
 			// 
 			dgvCarreras.AllowUserToAddRows = false;
-			dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 255, 192);
-			dataGridViewCellStyle1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = Color.Teal;
-			dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-			dgvCarreras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 255, 192);
+			dataGridViewCellStyle3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+			dataGridViewCellStyle3.SelectionBackColor = Color.Teal;
+			dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+			dgvCarreras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			dgvCarreras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle2.BackColor = Color.Teal;
-			dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle2.ForeColor = Color.White;
-			dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(192, 192, 255);
-			dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-			dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-			dgvCarreras.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = Color.Teal;
+			dataGridViewCellStyle4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle4.ForeColor = Color.White;
+			dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(192, 192, 255);
+			dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+			dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+			dgvCarreras.DefaultCellStyle = dataGridViewCellStyle4;
 			dgvCarreras.EnableHeadersVisualStyles = false;
 			dgvCarreras.Location = new Point(314, 342);
 			dgvCarreras.Name = "dgvCarreras";
@@ -154,21 +163,22 @@ namespace prySistemaEscolar
 			dgvCarreras.TabIndex = 3;
 			dgvCarreras.SelectionChanged += dgvCarreras_SelectionChanged;
 			// 
-			// textBox1
+			// txtNombreCarrera
 			// 
-			textBox1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox1.Location = new Point(735, 301);
-			textBox1.Name = "textBox1";
-			textBox1.PlaceholderText = "Buscar Carrera";
-			textBox1.Size = new Size(203, 35);
-			textBox1.TabIndex = 4;
+			txtNombreCarrera.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNombreCarrera.Location = new Point(735, 301);
+			txtNombreCarrera.Name = "txtNombreCarrera";
+			txtNombreCarrera.PlaceholderText = "Buscar Carrera";
+			txtNombreCarrera.Size = new Size(203, 35);
+			txtNombreCarrera.TabIndex = 4;
+			txtNombreCarrera.TextChanged += txtNombreCarrera_TextChanged;
 			// 
 			// frmCarreras
 			// 
 			BackgroundImage = Properties.Resources.imagen6;
 			BackgroundImageLayout = ImageLayout.Stretch;
 			ClientSize = new Size(1249, 499);
-			Controls.Add(textBox1);
+			Controls.Add(txtNombreCarrera);
 			Controls.Add(dgvCarreras);
 			Controls.Add(pnlAgrupaControles);
 			Controls.Add(lblTitulo);
@@ -193,7 +203,7 @@ namespace prySistemaEscolar
 		private TextBox txtDescripcion;
 		private TextBox txtNombre;
 		private DataGridView dgvCarreras;
-		private TextBox textBox1;
+		private TextBox txtNombreCarrera;
 		private Panel pnlAgrupaControles;
 
 		private void dgvCarreras_SelectionChanged(object sender, EventArgs e)

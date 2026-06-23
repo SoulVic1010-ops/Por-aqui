@@ -14,16 +14,30 @@ namespace prySistemaEscolar
 		//usamos una tabla temporal
 		private DataTable tabla;
 
+		//propiedad para el nombreCarrera
+		public string NombreCarrera{ get => nombreCarrera; set =>nombreCarrera = value;}
+
+
 		//Metodo para cargar datos en el DataGrid
 		public DataTable CargarDataGrid()
 		{
 			tabla = new DataTable();
-
-			clsConexion conexionDB = new clsConexion();
-			var conexion =conexionDB.AbrirConexion();
-			string sql = "SELECT idCarrera AS Clave,nombreCarrera AS Carrera,descripcion AS Descipción FROM tblcarreras;";
-			consulta = new MySqlDataAdapter(sql, conexion);
-			consulta.Fill(tabla);
+			try
+			{
+				clsConexion conexionDB = new clsConexion();
+				using (var conexion = conexionDB.AbrirConexion()) 
+				{
+					string sql = "SELECT idCarrera AS Clave,nombreCarrera AS Carrera,descripcion AS Descipción FROM tblcarreras;";
+					using (consulta = new MySqlDataAdapter(sql, conexion)) 
+					{
+						consulta.Fill(tabla);
+					}//liberar la consulta
+				}//Liberar la conexion 
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Error en la conexion "+ex.Message);
+			}
 			return (tabla);
 		}
 
@@ -56,4 +70,8 @@ namespace prySistemaEscolar
 
 		
 	}
+
+		
+	
 }
+
